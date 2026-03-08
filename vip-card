@@ -1,0 +1,283 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VIP Membership Card</title>
+
+  <!-- Premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#d6b66a;
+      --gold-soft:#f1deaa;
+      --ink:#07090d;
+      --ink2:#0f131b;
+      --ink3:#161b24;
+      --text:#efe2bc;
+      --muted:#c9b98c;
+      --ok:#44d28d;
+      --bad:#f36c6c;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:radial-gradient(1200px 700px at 50% -200px,#2b2f38 0%,#161a22 45%,#0d1015 100%);
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text);
+      padding:24px;
+    }
+
+    .stage{width:min(940px,96vw); display:grid; gap:28px}
+    .scene{perspective:1400px}
+    .card{
+      width:100%;
+      aspect-ratio:1.58/1;
+      position:relative;
+      transform-style:preserve-3d;
+      transition:transform .75s cubic-bezier(.2,.75,.2,1);
+      cursor:pointer;
+    }
+    .card.is-flipped{transform:rotateY(180deg)}
+
+    .face{
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:
+        0 28px 55px rgba(0,0,0,.5),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      background:
+        linear-gradient(110deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,.03) 52%, rgba(255,255,255,0) 72%),
+        linear-gradient(90deg,var(--ink) 0%,var(--ink2) 48%,var(--ink3) 100%);
+    }
+
+    /* geometric pattern */
+    .face::before{
+      content:"";
+      position:absolute; inset:0;
+      opacity:.19;
+      background:
+        linear-gradient(30deg, transparent 24%, rgba(214,182,106,.28) 24.5%, rgba(214,182,106,.28) 25.5%, transparent 26%) 0 0/120px 105px,
+        linear-gradient(150deg, transparent 24%, rgba(214,182,106,.28) 24.5%, rgba(214,182,106,.28) 25.5%, transparent 26%) 0 0/120px 105px,
+        linear-gradient(90deg, transparent 47%, rgba(214,182,106,.2) 47.5%, rgba(214,182,106,.2) 48.5%, transparent 49%) 0 0/120px 105px;
+      pointer-events:none;
+    }
+
+    .border{
+      position:absolute; inset:18px;
+      border-radius:20px;
+      border:3px solid var(--gold);
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.35);
+      pointer-events:none;
+    }
+
+    .inner{position:absolute; inset:0; padding:44px 52px; display:flex; flex-direction:column; justify-content:center; text-align:center}
+
+    .brand{
+      font-family:Cinzel,serif;
+      font-size:clamp(32px,5.6vw,76px);
+      line-height:.95;
+      letter-spacing:1px;
+      font-weight:700;
+      color:var(--gold-soft);
+      text-transform:uppercase;
+    }
+    .subtitle{
+      margin-top:8px;
+      font-family:Cinzel,serif;
+      font-size:clamp(16px,2vw,32px);
+      letter-spacing:6px;
+      color:var(--gold-soft);
+      text-transform:uppercase;
+    }
+    .script{
+      margin-top:14px;
+      font-family:"Great Vibes",cursive;
+      font-size:clamp(28px,3.2vw,56px);
+      color:#e9d6a1;
+    }
+
+    .member-line{
+      margin-top:22px;
+      font-size:clamp(16px,1.8vw,24px);
+      color:var(--muted);
+      letter-spacing:.5px;
+    }
+    .member-name{
+      margin-top:4px;
+      font-family:Cinzel,serif;
+      font-size:clamp(24px,2.6vw,42px);
+      color:var(--gold-soft);
+      text-transform:uppercase;
+    }
+
+    .status{
+      margin:18px auto 0;
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(214,182,106,.5);
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:13px;
+      color:#e7d6a5;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .dot{width:8px;height:8px;border-radius:50%}
+    .dot.active{background:var(--ok)}
+    .dot.inactive{background:var(--bad)}
+
+    .back{transform:rotateY(180deg)}
+    .back .inner{align-items:flex-start; text-align:left; justify-content:space-between}
+
+    .benefit-title{
+      width:100%;
+      text-align:center;
+      font-family:Cinzel,serif;
+      font-size:clamp(26px,3.2vw,48px);
+      color:var(--gold-soft);
+      letter-spacing:1px;
+      text-transform:uppercase;
+      margin-top:6px;
+    }
+
+    .benefits{
+      margin:24px 0 0;
+      width:100%;
+      list-style:none;
+      padding:0;
+      display:grid;
+      gap:12px;
+      font-size:clamp(18px,2vw,30px);
+      color:#e8d9ad;
+    }
+    .benefits li{
+      display:flex; gap:14px; align-items:flex-start;
+      line-height:1.25;
+    }
+    .num{
+      min-width:28px;
+      font-family:Cinzel,serif;
+      color:var(--gold-soft);
+    }
+
+    .signature{
+      width:100%;
+      text-align:right;
+      font-family:Cinzel,serif;
+      font-size:clamp(22px,2.4vw,42px);
+      color:var(--gold-soft);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-top:18px;
+    }
+
+    .hint{
+      text-align:center;
+      font-size:13px;
+      color:#aeb6c7;
+      margin-top:10px;
+      letter-spacing:.3px;
+    }
+
+    @media (max-width:720px){
+      .inner{padding:26px 24px}
+      .border{inset:12px}
+      .benefits{gap:9px}
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="scene">
+      <div class="card" id="vipCard" tabindex="0" aria-label="Flip VIP card">
+        <!-- FRONT -->
+        <section class="face front">
+          <div class="border"></div>
+          <div class="inner">
+            <div class="brand" id="restaurantName">BEACON</div>
+            <div class="subtitle">HOLDINGS</div>
+            <div class="script">Private Club &amp; Dining</div>
+
+            <div class="member-line">VIP Membership</div>
+            <div class="member-name" id="memberName">MEMBER NAME</div>
+
+            <div class="status" id="statusBadge">
+              <span class="dot active" id="statusDot"></span>
+              <span id="statusText">ACTIVE</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- BACK -->
+        <section class="face back">
+          <div class="border"></div>
+          <div class="inner">
+            <div class="benefit-title">Exclusive Benefits</div>
+
+            <ul class="benefits" id="benefitsList">
+              <li><span class="num">1.</span><span>Priority Reservations &amp; Seating</span></li>
+              <li><span class="num">2.</span><span>Curated Events &amp; Tastings</span></li>
+              <li><span class="num">3.</span><span>Bespoke Concierge Service</span></li>
+            </ul>
+
+            <div class="signature" id="signatureName">MEMBER NAME</div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="hint">Click or press Enter/Space to flip</div>
+  </div>
+
+  <script>
+    // Query params:
+    // restaurantName, memberName, status, benefits (pipe-separated)
+    const q = new URLSearchParams(location.search);
+
+    const restaurantName = (q.get("restaurantName") || "BEACON").trim();
+    const memberName = (q.get("memberName") || "MEMBER NAME").trim();
+    const statusRaw = (q.get("status") || "ACTIVE").trim();
+    const isActive = statusRaw.toLowerCase() === "active";
+
+    document.getElementById("restaurantName").textContent = restaurantName;
+    document.getElementById("memberName").textContent = memberName;
+    document.getElementById("signatureName").textContent = memberName;
+    document.getElementById("statusText").textContent = statusRaw.toUpperCase();
+
+    const dot = document.getElementById("statusDot");
+    dot.classList.toggle("active", isActive);
+    dot.classList.toggle("inactive", !isActive);
+
+    const benefitsParam = (q.get("benefits") || "").trim();
+    if (benefitsParam) {
+      const list = document.getElementById("benefitsList");
+      list.innerHTML = "";
+      benefitsParam.split("|").map(s => s.trim()).filter(Boolean).forEach((b, i) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="num">${i + 1}.</span><span>${b}</span>`;
+        list.appendChild(li);
+      });
+    }
+
+    const card = document.getElementById("vipCard");
+    const flip = () => card.classList.toggle("is-flipped");
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        flip();
+      }
+    });
+  </script>
+</body>
+</html>
+
