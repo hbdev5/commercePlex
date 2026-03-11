@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Future of Human Gene Editing Through CRISPR/Cas9 — Samita Golla</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --ink-muted: #6b6b8a;
+    --accent: #c0392b;
+    --accent-soft: #e8d5d3;
+    --paper: #faf8f4;
+    --paper-warm: #f4f0e8;
+    --border: #d9d4c8;
+    --highlight: #fff3cd;
+    --link: #1a5276;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* ── Header ── */
+  .journal-header {
+    background: var(--ink);
+    color: #f0ede6;
+    text-align: center;
+    padding: 14px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .journal-header a { color: #c8c0b0; text-decoration: none; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--paper-warm);
+    border-bottom: 2px solid var(--ink);
+    padding: 60px 24px 50px;
+    text-align: center;
+  }
+
+  .hero-journal {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.25;
+    max-width: 780px;
+    margin: 0 auto 20px;
+    color: var(--ink);
+  }
+
+  .hero-author {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+
+  .hero-author strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .hero-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 28px;
+  }
+
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .kw {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--ink-light);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  /* ── Layout ── */
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    align-items: start;
+    padding: 0;
+  }
+
+  /* ── Sidebar TOC ── */
+  .toc-sidebar {
+    position: sticky;
+    top: 24px;
+    padding: 36px 24px 36px 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .toc-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-list li { margin-bottom: 2px; }
+
+  .toc-list a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-light);
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .toc-list a:hover {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .toc-list .toc-section {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 13px;
+    margin-top: 12px;
+    margin-bottom: 2px;
+  }
+
+  .toc-list .toc-sub {
+    padding-left: 16px;
+  }
+
+  /* ── Article ── */
+  .article-body {
+    padding: 48px 48px 64px 48px;
+    min-width: 0;
+  }
+
+  /* ── Abstract ── */
+  .abstract-box {
+    background: var(--paper-warm);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+
+  .abstract-box .abstract-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .abstract-box p {
+    font-size: 15.5px;
+    color: var(--ink-light);
+    line-height: 1.8;
+  }
+
+  /* ── Section headings ── */
+  .section-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 52px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--accent-soft);
+  }
+
+  .section-heading.first { margin-top: 0; }
+
+  h2.content-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+
+  h3.subsection {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  h3.subsection .sub-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 500;
+  }
+
+  /* ── Body text ── */
+  p {
+    margin-bottom: 18px;
+    color: var(--ink);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* ── Citations ── */
+  sup.cite {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--link);
+    vertical-align: super;
+    line-height: 0;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 1px;
+  }
+
+  sup.cite:hover { color: var(--accent); }
+
+  sup.cite a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* ── Works Cited ── */
+  .works-cited {
+    margin-top: 52px;
+    border-top: 2px solid var(--ink);
+    padding-top: 32px;
+  }
+
+  .works-cited ol {
+    list-style: none;
+    padding: 0;
+    counter-reset: ref-counter;
+  }
+
+  .works-cited ol li {
+    counter-increment: ref-counter;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+    padding-left: 36px;
+    position: relative;
+    text-align: left;
+  }
+
+  .works-cited ol li::before {
+    content: counter(ref-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 24px;
+    text-align: right;
+    padding-top: 1px;
+  }
+
+  .works-cited ol li:target {
+    background: var(--highlight);
+    border-radius: 4px;
+    padding: 6px 6px 6px 36px;
+    transition: background 0.3s;
+  }
+
+  /* ── Figures ── */
+  .figures-section {
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+  }
+
+  .figure-caption {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .figure-caption strong {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── Acknowledgements ── */
+  .meta-section {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .meta-section strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+
+  .meta-section + .meta-section { margin-top: 10px; }
+
+  /* ── Download bar ── */
+  .download-bar {
+    background: white;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink-muted);
+    flex-wrap: wrap;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ink);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-download:hover { background: var(--accent); }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--ink);
+    color: #8888aa;
+    text-align: center;
+    padding: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    margin-top: 64px;
+  }
+
+  footer a { color: #aab0cc; text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc-sidebar { display: none; }
+    .article-body { padding: 28px 20px 48px; }
+    .download-bar { padding: 14px 20px; }
+  }
+
+  /* ── Smooth cite highlight ── */
+  :target { scroll-margin-top: 80px; }
+</style>
+</head>
+<body>
+
+<div class="journal-header">
+  Curieux Academic Journal &nbsp;·&nbsp; Pages 307–319 &nbsp;·&nbsp; High School Research Division
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-journal">Curieux Academic Journal</div>
+  <h1>The Future of Human Gene Editing Through CRISPR/Cas9</h1>
+  <div class="hero-author">By <strong>Samita Golla</strong></div>
+  <div class="hero-meta">Published in Curieux Academic Journal &nbsp;·&nbsp; pp. 307–319</div>
+  <div class="keywords">
+    <span class="kw">CRISPR/Cas9</span>
+    <span class="kw">DNA</span>
+    <span class="kw">SgRNA</span>
+    <span class="kw">Ethics</span>
+    <span class="kw">Gene editing</span>
+    <span class="kw">Gene therapy</span>
+  </div>
+</div>
+
+<!-- Download bar -->
+<div class="download-bar">
+  <a href="samita-golla-crispr-paper-pages-307-319.pdf" class="btn-download">↓ Download PDF</a>
+  <span>Original journal pages 307–319 &nbsp;·&nbsp; 23 references &nbsp;·&nbsp; 3 figures</span>
+</div>
+
+<!-- Main layout -->
+<div class="layout">
+
+  <!-- TOC Sidebar -->
+  <nav class="toc-sidebar" aria-label="Table of contents">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#abstract" class="toc-section">Abstract</a></li>
+      <li><a href="#intro" class="toc-section">Introduction</a></li>
+      <li><a href="#dna-structure" class="toc-sub">[a] DNA Structure</a></li>
+      <li><a href="#dna-replication" class="toc-sub">[b] DNA Replication</a></li>
+      <li><a href="#transcription" class="toc-sub">[c] Transcription & Translation</a></li>
+      <li><a href="#mutations" class="toc-sub">[d] Mutations</a></li>
+      <li><a href="#results" class="toc-section">Results — CRISPR</a></li>
+      <li><a href="#background" class="toc-sub">[a] Background</a></li>
+      <li><a href="#mechanism" class="toc-sub">[b] Mechanism</a></li>
+      <li><a href="#advantages" class="toc-sub">[c] Advantages</a></li>
+      <li><a href="#delivery" class="toc-sub">[d] Delivery</a></li>
+      <li><a href="#immunogenicity" class="toc-sub">[e] Immunogenicity</a></li>
+      <li><a href="#offtarget" class="toc-sub">[f] Off-Target Effects</a></li>
+      <li><a href="#discussion" class="toc-section">Discussion</a></li>
+      <li><a href="#works-cited" class="toc-section">Works Cited</a></li>
+      <li><a href="#figures" class="toc-section">Figures</a></li>
+    </ul>
+  </nav>
+
+  <!-- Article -->
+  <article class="article-body">
+
+    <!-- Abstract -->
+    <div class="abstract-box" id="abstract">
+      <div class="abstract-label">Abstract</div>
+      <p>While originally discovered as a bacterial defense mechanism against invading bacteriophages, Clustered Regularly Interspaced Short Palindromic Repeats (CRISPR) has now become a promising new tool for gene editing. Using the Cas9 protein and a single-guide RNA for sequence specific targeting, CRISPR can be utilized to create double-stranded DNA breaks to edit targeted genes or DNA sequences in the genome. Using CRISPR/Cas9 gene editing can fix harmful genetic mutations and cure genetic disorders. Challenges associated with the use of CRISPR/Cas9 still remain such as difficulty delivering it to cells without triggering an immune reaction and off-target effects. Another issue that remains prominent is the ethics of using this technology; there are ongoing debates about in what cases it is ethical to use this gene editing tool on humans because of its potential for misuse. While the future of gene therapy using the CRISPR/Cas9 technology is hopeful, there remain many further discussions and necessary developments involving this tool.</p>
+    </div>
+
+    <!-- Introduction -->
+    <div class="section-heading first" id="intro">Introduction</div>
+    <h2 class="content-title">What is DNA?</h2>
+
+    <h3 class="subsection" id="dna-structure"><span class="sub-label">[a]</span> The Structure of DNA</h3>
+    <p>DNA is a double stranded molecule that carries the entirety of a cell's genetic material. It is built up from nucleotides which are composed of a 5-carbon sugar (each carbon is numbered from 1' to 5' giving an orientation) called deoxyribose, a phosphate group, and one of four nitrogenous bases. These four possible nitrogenous bases are Adenine, Thymine, Cytosine, and Guanine. Structurally, DNA forms a double helix shape and the so-called "backbone" of this helix is made of alternating deoxyribose sugars and phosphate groups (Figure 1). The phosphate group is attached to the 5' carbon of the 5-carbon sugar and a hydroxyl group is attached to the 3' carbon of the sugar. Nucleotides link to each other through the 5' phosphate group binding to the 3' hydroxyl group of the previous nucleotide. The orientation of nucleotides is responsible for DNA directionality in the 5' to 3' direction, and since DNA strands are complementary to each other, the other strand runs antiparallel in the 3' to 5' direction. The other part of the DNA helix are the nitrogenous bases which are held together by hydrogen bonds. The base Adenine only pairs with Thymine and Cytosine only pairs with Guanine. This basepairing is only possible due to the antiparallel orientation of the strands. These base pairing rules are what makes DNA's two strands complementary to each other.<sup class="cite"><a href="#ref-1">[1]</a></sup></p>
+
+    <h3 class="subsection" id="dna-replication"><span class="sub-label">[b]</span> Cellular Division Requires DNA Replication</h3>
+    <p>The cell cycle consists of four stages: G1, S, G2, and M. A cell's life starts out in the G1 stage where it is mainly just growing and performing regular cellular functions. In the S stage, DNA replication occurs where the cell temporarily has double its original genetic material. The process of DNA replication is semi-conservative, in that the original doubled stranded DNA is split into two strands so that each new DNA helix has one newly synthesized strand of DNA and one old strand. In the DNA replication process, enzymes such as DNA polymerase use the parent strand as a template to synthesize a new daughter strand from each parent strand following the nitrogenous base pairing rules. DNA complementarity is directionality dependent, meaning that replication of the new DNA can only occur in the 5' to 3' direction.<sup class="cite"><a href="#ref-2">[2]</a></sup></p>
+    <p>The M stage is the mitotic stage and it involves the division of all the somatic cells (all body cells except the reproductive cells). The duplicated DNA made during the S stage is split up into two new identical cells in the process of mitosis. Any changes made to the DNA of a parent cell are passed down to the new daughter cell through mitosis, however changes made to somatic cells are not heritable to progeny for organisms that give rise to offspring through sexual reproduction. For example, a spontaneous mutation that occurs in a parent's somatic cell is not passed down to their offspring; for changes in DNA to be seen in offspring, mutations must be present in sex cells, egg and sperm in humans.<sup class="cite"><a href="#ref-3">[3]</a></sup> This same concept of inheriting genetic changes applies to deliberate gene editing.</p>
+
+    <h3 class="subsection" id="transcription"><span class="sub-label">[c]</span> DNA Instructs Cellular Functions Through Transcription and Translation</h3>
+    <p>DNA is the storage location for cellular instructions, and transcription is the first step to decode these instructions. Transcription is the process whereby messenger RNA (mRNA) is synthesized from a strand of DNA, which is done through the usage of several enzymes. The main enzyme, RNA polymerase, initiates transcription by binding to a promoter sequence on a specific gene. An example of a promoter sequence is a TATA box, a sequence that consists mainly of alternating thymine (T) and adenine (A) nucleotides. RNA polymerase then unzips the DNA double helix and begins attaching complementary bases of RNA to one strand of the DNA except it uses the base uracil instead of thymine when pairing with adenine to create mRNA. Transcription stops when RNA polymerase runs into a terminator sequence, causing it to fall off of the template DNA strand and end transcription. The main difference between RNA and DNA is that RNA has the nitrogenous base uracil (U) instead of thymine and RNA has the sugar ribose instead of deoxyribose.<sup class="cite"><a href="#ref-2">[2]</a></sup></p>
+    <p>Translation is the process of using mRNA as instructions to create a protein. The mRNA is read by the ribosome three base pairs at a time as a codon and each codon corresponds to one of the twenty different amino acids through the use of a tRNA molecule. Since there are 64 different possible codons, some codons correspond to the same amino acid. Each tRNA has a section on it called the anti-codon which is the complementary pairing of the codon on the mRNA (for example if a codon is AUG, then the anti-codon will be UAC). An important enzyme called aminoacyl-tRNA synthetases matches its specific amino acid to a tRNA molecule and as more amino acids are added, they form peptide bonds to each other. Translation stops when a stop codon is encountered (UAG, UAA, or UGA). Then the bonded amino acid chain folds into the protein that the specific mRNA was coding for, often with the help of chaperon proteins.<sup class="cite"><a href="#ref-4">[4]</a></sup></p>
+
+    <h3 class="subsection" id="mutations"><span class="sub-label">[d]</span> Mutations in DNA Impact Cellular Function</h3>
+    <p>Mutations in the DNA sequence can alter protein and cellular functions. The main types of mutations in DNA are deletions (nucleotides are deleted from a gene), insertions (nucleotides are inserted into a gene), inverses (a segment of DNA is cut out and reversed in orientation) or substitutions (where one or more nucleotides are swapped with another)<sup class="cite"><a href="#ref-5">[5]</a></sup> (Figure 2). Insertions and deletions (indels), as well as inversions are referred to as frame shift mutations because these mutations change all the codon sequences that come after that mutation, changing most if not all of the amino acids in the protein, making them generally more impactful than substitution mutations. Substitution mutations alter one basepair within a codon which alters a single amino acid, and in the case of a "silent mutation" does not have any noticeable effect due to the fact that multiple codons correspond to the same amino acid. The real danger of substitution mutations though, is that they can sometimes cause a stop codon to appear earlier in the peptide sequence than it should, creating an unfinished protein. Any of these listed mutations can result in nonfunctional proteins which can cause detrimental disorders in people. Any changes to DNA sequences leads to changes to mRNA which then causes changes in proteins and their function in the cell.<sup class="cite"><a href="#ref-6">[6]</a></sup> However, with proper gene editing tools, deliberate changes in a DNA sequence can be introduced to elicit positive effects or restore original functionality.</p>
+
+    <!-- Results -->
+    <div class="section-heading" id="results">Results</div>
+    <h2 class="content-title">What is CRISPR?</h2>
+
+    <h3 class="subsection" id="background"><span class="sub-label">[a]</span> Background on CRISPR</h3>
+    <p>CRISPR was first discovered in 1989 in <em>Escherichia coli</em> (E. Coli) bacteria as a defense mechanism against invading viruses called bacteriophages. CRISPR is made up of short repetitive sequences of DNA which are occasionally interrupted by unique spacers. These spacers are fragments of infecting viral DNA and they act as a "molecular record." The recognition of a spacer fragment indicates to the bacteria there is a viral intruder and guides the destruction of that virus if it tries to invade the bacterium cell again. In addition to these sequences, an important component of the CRISPR complex is the Cas9 protein, which is responsible for cutting double stranded DNA at specific sites.</p>
+    <p>There are two different systems of CRISPR: Class I and Class II. Class I CRISPR utilizes multi protein complexes to find and cut DNA sequences, whereas Class II relies on a single multi-domain cas protein such as Cas9. Due to its efficiency and simplicity, the Class II system is primarily used for gene editing and engineering.<sup class="cite"><a href="#ref-7">[7]</a></sup> There are different types of Cas9 proteins based on the strain of bacteria they come from. The main differences of these Cas9s are how immunogenic they are and specificity in their PAM sites, but in general they all have the same function of initiating the cut in the targeted DNA. SpCas9 (from the bacteria <em>Streptococcus pyogenes</em>) is often used for gene editing in CRISPR based therapies due to its efficiency in gene therapy. SaCas9 (from the bacteria <em>Staphylococcus aureus</em>) is another important Cas9 protein for gene therapy; due to its small size, it is easier to deliver into human cells.<sup class="cite"><a href="#ref-8">[8]</a></sup> Although SpCas9 was the first Cas9 to be employed for genomic editing, due to its large size and the fact that it causes immune responses in the body, researchers now use an engineered variant of SpCas9 for CRISPR projects that will be referred to simply as "Cas9" in this paper.<sup class="cite"><a href="#ref-9">[9]</a></sup></p>
+
+    <h3 class="subsection" id="mechanism"><span class="sub-label">[b]</span> The Mechanism of CRISPR</h3>
+    <p>The class II CRISPR system uses a guide RNA along with a Cas9 protein to identify and cut DNA for gene editing. A single guide RNA (sgRNA) is composed of two discrete sequences within the RNA molecule that are joined by a linker loop; the two sections are the trans-activating CRISPR RNA (tracrRNA) and CRISPR RNA (crRNA).<sup class="cite"><a href="#ref-10">[10]</a></sup> The crRNA contains spacers which are specific sequences of genes that the Cas9 protein can target, which can come from foreign DNA from viruses such as in the case of bacteria. The tracrRNA binds to the repeat regions of the crRNA which forms the sgRNA that the Cas9 protein then binds to.<sup class="cite"><a href="#ref-11">[11]</a></sup> For the sgRNA to be able to bind to its target gene, the Cas9 needs to find a Protospacer Adjacent Motif (PAM) site. A PAM site is a sequence of DNA starting with N(any nucleotide)GG (Figure 3). This site has to be present 3–4 bases downstream of the desired gene for CRISPR to work.<sup class="cite"><a href="#ref-11">[11]</a></sup> The tracrRNA starts the actual gene editing process by helping activate the Cas9 protein in cleaving the target DNA. The Cas9 protein has two endonuclease domains: HNH and RuvC. HNH cleaves the DNA strand that is complementary while the RuvC cleaves the non-complementary strand of DNA, causing a double stranded DNA break.<sup class="cite"><a href="#ref-12">[12]</a></sup> When it comes to using CRISPR in humans as an actual gene therapy, a specific sgRNA can be synthesized by researchers for precise targeting. The spacer sequences in the crRNA can be synthetically designed using a specific gene sequence so that the Cas9 protein will target a desired gene or sequence of DNA.<sup class="cite"><a href="#ref-11">[11]</a></sup></p>
+    <p>There are two different types of repair mechanisms for double stranded DNA breaks: non-homologous end joining (NHEJ) or homology directed repair (HDR). NHEJ is a much less accurate repair system, as this process quickly re-connects broken DNA ends without a guide template. NHEJ prioritizes speed over accuracy so it often causes many mutations such as insertions or deletions in the DNA it tries to repair. The introduction of mutations, as previously discussed, often renders the protein that the gene was meant to code useless. HDR however, uses a template to properly repair the DNA break. If a modified DNA template is provided for HDR, it will direct the cell to remake the DNA sequence in the desired way. For example, with the right template HDR can fix a mutated gene by inserting the right nucleotides. HDR is a key way to use CRISPR for gene therapy because it can add a gene sequence to a DNA break site to restore or alter the function of a gene.<sup class="cite"><a href="#ref-13">[13]</a></sup></p>
+
+    <h3 class="subsection" id="advantages"><span class="sub-label">[c]</span> What CRISPR Can Do That Other Gene Editing Tools Cannot</h3>
+    <p>Gene editing is a process that modifies one's genome to introduce beneficial changes to a person's DNA to change the original coding. Before CRISPR, a few prominent gene therapies included Zinc-Finger Nucleases (ZFN) and Transcription Activator-Like Effector Nucleases (TALEN). ZFN and TALEN both use a specifically engineered protein that directly recognizes a DNA sequence, so each protein construct can only work at one specific site until they are re-designed. Whereas for CRISPR, multiple sgRNAs can be utilized to have Cas9 make multiple cuts. This makes CRISPR much more efficient than ZFN and TALEN gene editing which requires precise and time consuming protein design to achieve targeting that rapidly designed sgRNA in CRISPR can provide.<sup class="cite"><a href="#ref-14">[14]</a></sup></p>
+    <p>Furthermore, the CRISPR/Cas9 system can be much more modular and adaptable than TALENs and ZFNs as it can be used for a variety of other mechanisms to edit or alter genes. By modifying a Cas9 protein by fusing it with a deaminase enzyme, CRISPR/Cas9 can alter base pairs but without causing a double-stranded break. When the modified Cas9 and sgRNA bind to the target DNA a single-stranded DNA region called an R-loop forms. Then the deaminase enzyme attached to the Cas9 can chemically alter a nucleotide to another (for example changing a Cytosine into a Guanine). This form of CRISPR is called prime editing. As substitution mutations account for over 50% of genetic mutations,<sup class="cite"><a href="#ref-15">[15]</a></sup> being able to fix these mutations could cure many genetic disorders and save lives, a feature that other genetic tools do not have. Combined with its adaptability and ability to not have to be re-engineered for every new DNA sequence CRISPR possesses advantages over other genetic tools that support the time spent researching and perfecting it for human trials.</p>
+
+    <h3 class="subsection" id="delivery"><span class="sub-label">[d]</span> Approaches to Delivering CRISPR to Human Cells</h3>
+    <p>There are different ways of delivering CRISPR/Cas9 components to human cells for gene therapy. The first is the <em>ex vivo</em> approach where cells are edited with CRISPR/Cas9 outside of the body in a culture medium and then those cells are re-planted back into the patient.<sup class="cite"><a href="#ref-16">[16]</a></sup> An example of the <em>ex vivo</em> approach is the study by Everette et al. which edited Hematopoietic Stem and Progenitor Cells (HSPCs—cells that give rise to blood cells) from patients with Sickle Cell Disease.<sup class="cite"><a href="#ref-17">[17]</a></sup> Sickle Cell Disease is caused by a single point mutation in the HBB gene that produces abnormally shaped red blood cells that cannot properly carry oxygen in the body. Everette et al. performed <em>ex vivo</em> prime editing on the extracted HSPCs to correct the point mutation and then the edited cells were transplanted into immunodeficient mice. After 17 weeks, most of the red blood cells made by the corrected HSPC cells in the mice functioned normally.<sup class="cite"><a href="#ref-17">[17]</a></sup> The <em>ex vivo</em> approach has appeal in that it causes less of an immunogenic response than <em>in vivo</em> because the CRISPR editing tools that would cause that response are not seen by the host immune system.<sup class="cite"><a href="#ref-17">[17]</a></sup> There are problems with the <em>ex vivo</em> approach however, it only works for cells that are easy to collect, can survive in the lab, and be able to function after being returned to the patient. There are a few cells that fit these criteria such as blood and immune cells but many others that do not such as neurons, making <em>ex vivo</em> CRISPR mostly limited to treating immune and blood disorders.<sup class="cite"><a href="#ref-13">[13]</a></sup> Even with these shortcomings, the <em>ex vivo</em> approach is still valuable for researchers to pursue because there are still many blood and immune disorders that could benefit from being treated with CRISPR.</p>
+    <p>The second approach is <em>in vivo</em> delivery where the Cas9 and sgRNA are introduced directly into the body to enter cells; however, there are some issues with this approach such as immunogenicity that will be discussed later. One way of delivering CRISPR components <em>in vivo</em> to cells is through the use of plasmid DNA. The plasmid DNA carries the sequence of both the sgRNA and Cas9 protein and is introduced into the cell through viral delivery systems such as Adeno-Associated Virus (AAV) or non-viral systems like lipid nanoparticles (LNP), which will be discussed as well. Once in the nucleus, the plasmid DNA is transcribed into the sgRNA and an mRNA which is then translated into the Cas9 protein. In this way CRISPR components are delivered to the site of activity, inside a cell, without immune recognition. Some problems with this method include the requirement for a target cell to be actively transcribing and translating, not to mention the time for the cell to carry out those functions.<sup class="cite"><a href="#ref-16">[16]</a></sup></p>
+    <p>Another way of delivering CRISPR components to cells is by directly inserting (with a non-viral or viral delivery system) Cas9 mRNA and sgRNA so that the mRNA can be translated into Cas9 which will then bind with the sgRNA and begin gene editing. This method is shorter than using plasmids because it does not rely on both cellular transcription and translation to produce the CRISPR/Cas9 components. However, this method may be less stable because the delivered mRNA is often broken down by RNAse enzymes in the cell. The last method is ribonucleoprotein (RNP) delivery where the sgRNA and Cas9 protein complex are delivered directly into the cell. Editing can start right away so this method is quickest, but due to the RNP's large size, it is hard for it to cross the cell membrane.<sup class="cite"><a href="#ref-18">[18]</a></sup> However, all three of these methods using the in-vivo approach share some common problems.</p>
+
+    <h3 class="subsection" id="immunogenicity"><span class="sub-label">[e]</span> Immunogenicity Problems in Using CRISPR as a Therapy</h3>
+    <p>Early gene therapy treatments in humans led to serious side effects including patient death, leading to a slowdown in the development and application of gene therapies. Even though immunogenicity against CRISPR/Cas9 is still a huge problem when it comes to using it on patients, using CRISPR/Cas9 is becoming prominent in science fields. Because CRISPR originates from bacteria, the human immune system can perceive the Cas9 protein as a foreign substance, triggering an immune response. In immune responses, immune cells in the body called B cells can produce antibodies specific for the foreign CRISPR components which bind and mark them for destruction. Due to CRISPR's bacterial origins, many people have already encountered the same bacteria CRISPR comes from and will have pre-existing antibodies for it, causing cells to recognize and destroy the therapeutic CRISPR components like it would a pathogen, before the gene editing process can even begin.<sup class="cite"><a href="#ref-15">[15]</a></sup></p>
+    <p>MHC (Major Histocompatibility Complex) Class I molecules are proteins found on the surface of almost every cell in an individual's body. Their role is to show killer CD8 T cells (a type of immune cell that protects the body from pathogens) tiny protein fragments sampled from within the cell; in the case of a cell infected by a virus, MHC-I could present viral proteins to signal it is infected. If the killer T cell recognizes those fragments to be foreign, they may attack the presenting cell and induce an immune response.<sup class="cite"><a href="#ref-8">[8]</a></sup> Raghavan et al. determined that a specific region of Cas9 was displayed as an epitope on MHC-I to the killer T cells; the researchers mutated the Cas9 protein so that the MHC-I was no longer able to bind and present those fragments to prevent the killer T cells from being alerted of a foreign presence. The experiment aimed to make Cas9 less detectable by the immune system and still keep its DNA cutting ability intact.<sup class="cite"><a href="#ref-8">[8]</a></sup> Overall the experiment showed a reduced immune response with the engineered Cas9; however, this process has only been tested in the lab and has not yet been used in patient trials so there is still a long way to go with addressing immunogenicity problems with CRISPR. While scientists are not there yet, in the future CRISPR could utilize a fully synthetic version of Cas9, not obtained from bacteria, to stop Cas9 specific immune responses.</p>
+    <p>The sgRNA can trigger immune responses as well due to certain chemical features like a 5' tri-phosphate group that are not normally found in human cell processes. Guide RNAs can be chemically altered or engineered to remove these phosphate groups, making them less likely to trigger an immune response.<sup class="cite"><a href="#ref-15">[15]</a></sup> Although sgRNA modification seems to be promising in reducing immune responses from the body, this method does not guarantee that the sgRNAs will be fully hidden from the immune system just yet and sgRNA immunogenicity remains a challenge.</p>
+    <p>All in all, it is important to consider that it's not just Cas9 and RNAs that cause immunogenicity problems, it is also the vehicles used to deliver them to cells in the body. Viral vectors such as AAV were considered ideal for delivering CRISPR/Cas9 to cells because viral capsids (and the derived viral vectors) are naturally suited to release their contents into cells, thus they could be utilized to properly deliver CRISPR/Cas9 into cells for gene editing. However, since AAV is a virus, the immune system can recognize the viral proteins on the AAV and trigger an immunogenetic response, which in some cases has led to clinical trial patients experiencing serious adverse effects including death when an AAV delivery system was used. An alternative to AAVs are non-viral delivery systems such as LNPs which are spherical based lipid carriers that are designed to safely carry CRISPR components to cells, by protecting them from being degraded by enzymes in the body. LNPs are absorbed into the cell when they come in contact with the cell membrane and during that process the LNPs are destabilized, releasing the CRISPR components safely into the cell. LNPs are a promising delivery mechanism for CRISPR/Cas9 due to low immunogenicity.<sup class="cite"><a href="#ref-19">[19]</a></sup></p>
+
+    <h3 class="subsection" id="offtarget"><span class="sub-label">[f]</span> Off-Target Effects Are a Cause for Concern with CRISPR</h3>
+    <p>An important consideration when using CRISPR as a gene therapy is to ensure there are no off target effects. When it comes to binding to the target DNA sequence, it is expected that the sgRNA has been designed to bind to one exact complementary sequence, however, the sgRNA can tolerate a few mismatches and still "recognize" a target sequence. Thus, it is possible that the sgRNA could bind to a very similar sequence elsewhere in the genome. If this occurs, Cas9 will be directed to cleave the DNA at an incorrect site and cause a double stranded DNA break, potentially leading to indels in the wrong part of the genome, something like this can have a significant impact on the organism. Alterations to just one gene can lead to dangerous changes in cellular function and even cell death. Another undesired effect of CRISPR can actually happen at the correctly targeted site. As mentioned prior, double-stranded breaks can be repaired by the cell incorrectly, in a harmful way that causes large genomic mutations such as deletions, insertions, duplications, or translocations (when a segment of DNA breaks off and attaches in the wrong area). Together, all these different mutations are called structural variants. Structural variants can sometimes cause oncogenes (mutated genes that can promote cancer growth) depending on the size of the structural variant and the type of cell it occurred in.<sup class="cite"><a href="#ref-20">[20]</a></sup></p>
+    <p>One method being used to reduce the impact of off target effects is called CRISPR GUARD. GUARD is shortened sgRNAs that are complementary to the off-target sites in the genomes, so they occupy those off-target sites, leaving only the correct site open for the sgRNA to bind. Since the GUARD RNAs are a couple of base pairs shorter than a sgRNA, the Cas9 can bind to it but it cannot activate its cleaving abilities on the GUARD RNAs, protecting the cell from off-target effects. CRISPR GUARD has successfully protected genes from off-target binding, but it has not been tested in patients yet.<sup class="cite"><a href="#ref-21">[21]</a></sup> In the future, GUARD RNAs can be incorporated into all CRISPR gene editing procedures to eliminate any potential off-target genomic alterations and overall make CRISPR safer to use on people.</p>
+
+    <!-- Discussion -->
+    <div class="section-heading" id="discussion">Discussion</div>
+    <p>CRISPR is a promising tool for human gene editing because it has shown some success in pre-clinical and clinical trials to edit the genome in both <em>ex vivo</em> and <em>in vivo</em> applications. There are three main applications human germline editing through the use of CRISPR is expected to be used for. The first is preventing serious gene disorders that would be passed from parent to child (such as sickle cell anemia), the second is reducing the risk of common diseases in people such as heart disease, and lastly enhancing human abilities beyond what humans are capable of now.</p>
+    <p>While there are still issues of immunogenicity and off-target effects, solutions are being developed in the lab that have begun to show beneficial results. However there remains the unresolved and outstanding issue regarding the ethics of using CRISPR in humans which is not something that can be solved with experimentation alone. Gene editing has been around for decades and the ethical debate surrounding its use has been ongoing, but with the emergence of CRISPR/Cas9 and the ease of which gene editing can occur, there has been a re-emergence in ethical debate. Now, there is a renewed focus on whether or not human germline editing is ethical because those edits could become heritable in future generations. In 2015, the first international summit on human gene editing took place, which came to the conclusion that before anyone should consider human germline editing, scientists must prove that it can be done safely and accurately. Furthermore, the summit concluded that the use of this technology should have general public agreement not just based on the decision of a few people. In 2018, a second conference on human gene editing was meant to take place but before it could, news broke that He Jiankui used CRISPR to create genetically altered babies which broke the conditions agreed upon in the 2015 conference.<sup class="cite"><a href="#ref-22">[22]</a></sup></p>
+    <p>In 2018, Jiankui He performed germline genomic editing using CRISPR to modify the CCR5 gene in two twin babies with the hypothesis that this edit would render the babies immune to HIV by removing the CCR5 protein receptor that the HIV virus uses to bind to and enter cells. This study involved an HIV positive father and an HIV negative mother—these conditions made the risk of actually transmitting HIV to a baby low. His study was met with global criticism due to his insufficient medical experience and education. Furthermore, the genomes of the babies edited were not likely to be born with HIV anyways, meaning this experiment could have caused harmful mutations to the genomes of HIV negative babies.</p>
+    <p>A few months after He's study, Russian scientist Denis Rebrikov planned a similar experiment and in October of 2019 was reported to be working on editing the GJB2 gene which is known to be associated with deafness. The ministry of Health of the Russian Federation denied Rebrikov's appeal to perform this study, citing that the work could end up being disastrous, effectively putting an end to Rebrikov's planned study.<sup class="cite"><a href="#ref-23">[23]</a></sup> Due to Rebrikov planning his study recently after the controversy He caused with his study, Rebrikov's plan received backlash and scrutiny causing his study to be ended. The halting of this study could be considered a win for the ethical use of CRISPR because another potentially unethical human trial study of CRISPR was stopped.</p>
+    <p>Despite the recent progress in CRISPR/Cas9 development, the views on human germline editing remain mixed. Use of CRISPR/Cas9 for germline editing can be viewed positively when the intent is to prevent individuals from having lifelong genetic diseases, such as sickle cell anemia and cystic fibrosis, thereby greatly improving quality of life or even saving lives where such disorders are lethal. On the other hand, human germline editing may not qualify as a protective genetic therapy if the edits are not preventing diseases but rather altering subjectively unfavorable traits. A condition like asthma could be argued both ways, while it is not life-threatening curing asthma can definitely improve a person's quality of life.</p>
+    <p>The biggest debate in human germline editing lies in using it for genetic enhancement. This means editing the genome for traits that do not directly correspond to an individual's health such as blue eyes or brown hair.<sup class="cite"><a href="#ref-22">[22]</a></sup> Over time, doing this can erase diversity and cause a future where babies are genetically designed to have particular phenotypes. This raises the question of if human germline editing is a way to save lives or if it is just a way to create "designer" babies. While CRISPR/Cas9 is a good technology and gene editing alone is not necessarily a bad tool, it can be used for morally grey purposes. Therefore, a line needs to be drawn between using CRISPR/Cas9 to prevent/cure diseases and improving quality of life to using it for subjective trait enhancement.</p>
+    <p>Although CRISPR has not been perfected and remains under debate as to what ethical boundaries should be set in place for gene editing, it remains an important tool that is currently being used in clinical trials with the potential to one day change the medical field for the better and save countless lives.</p>
+
+    <!-- Acknowledgements -->
+    <div class="meta-section">
+      <strong>Acknowledgements</strong>
+      Special thanks to mentor Brett Higgins for all the help in making this paper.
+    </div>
+    <div class="meta-section">
+      <strong>Funding</strong>
+      No funding to declare.
+    </div>
+    <div class="meta-section">
+      <strong>Declaration of Conflicts of Interest</strong>
+      The author declares that there are no conflicts of interest regarding the publication of this article.
+    </div>
+
+    <!-- Works Cited -->
+    <div class="works-cited" id="works-cited">
+      <div class="section-heading" style="margin-top:0; border-bottom: 1px solid var(--accent-soft); padding-bottom: 6px;">Works Cited</div>
+      <ol>
+        <li id="ref-1">Alberts, B. et al. The Structure and Function of DNA. in <em>Molecular Biology of the Cell</em>. 4th edition (Garland Science, 2002). ISBN 10: 0815332181</li>
+        <li id="ref-2">Mercadante, A. A., Dimri, M. &amp; Mohiuddin, S. S. Biochemistry, Replication and Transcription. in <em>StatPearls</em> [Internet] (StatPearls Publishing, 2023).</li>
+        <li id="ref-3">Alberts, B. et al. Mitosis. in <em>Molecular Biology of the Cell</em>. 4th edition (Garland Science, 2002). ISBN 10: 0815332181</li>
+        <li id="ref-4">Alberts, B. et al. From RNA to Protein. in <em>Molecular Biology of the Cell</em>. 4th edition (Garland Science, 2002). ISBN 10: 0815332181</li>
+        <li id="ref-5">Mahmoud, M. et al. Structural variant calling: the long and the short of it. <em>Genome Biology</em> 20, 246 (2019).</li>
+        <li id="ref-6">Ghannam, J. Y., Wang, J. &amp; Jan, A. Biochemistry, DNA Structure. in <em>StatPearls</em> [Internet] (StatPearls Publishing, 2023).</li>
+        <li id="ref-7">Asmamaw, M. &amp; Zawdie, B. Mechanism and Applications of CRISPR/Cas-9-Mediated Genome Editing. <em>Biologics: Targets &amp; Therapy</em> 15, 353 (2021).</li>
+        <li id="ref-8">Raghavan, R. et al. Rational engineering of minimally immunogenic nucleases for gene therapy. <em>Nature Communications</em> 16, 1–13 (2025).</li>
+        <li id="ref-9">Kovalev, M. A., Davletshin, A. I. &amp; Karpov, D. S. Engineering Cas9: next generation of genomic editors. <em>Applied Microbiology and Biotechnology</em> 108, 209 (2024).</li>
+        <li id="ref-10">Liu, Y., Liu, W. &amp; Wang, B. Engineering CRISPR guide RNAs for programmable RNA sensors. <em>Biochemical Society Transactions</em> 51, 2061 (2023).</li>
+        <li id="ref-11">Cong, L. et al. Multiplex Genome Engineering Using CRISPR/Cas Systems. <em>Science</em> (New York, N.Y.) 339, 819 (2013).</li>
+        <li id="ref-12">Jinek, M. et al. A programmable dual RNA-guided DNA endonuclease in adaptive bacterial immunity. <em>Science</em> (New York, N.Y.) 337, 816 (2012).</li>
+        <li id="ref-13">Palacios, A. M., Korus, P., Wilkens, B. G. C., Heshmatpour, N. &amp; Patnaik, S. R. Revolutionizing in vivo therapy with CRISPR/Cas genome editing: breakthroughs, opportunities and challenges. <em>Frontiers in Genome Editing</em> 6, 1342193 (2024).</li>
+        <li id="ref-14">Li, T. et al. CRISPR/Cas9 therapeutics: progress and prospects. <em>Signal Transduction and Targeted Therapy</em> 8, 1–23 (2023).</li>
+        <li id="ref-15">Kim, H. S., Kweon, J. &amp; Kim, Y. Recent advances in CRISPR-based functional genomics for the study of disease-associated genetic variants. <em>Experimental &amp; Molecular Medicine</em> 56, 861–869 (2024).</li>
+        <li id="ref-16">Ewaisha, R. &amp; Anderson, K. S. Immunogenicity of CRISPR therapeutics—Critical considerations for clinical translation. <em>Frontiers in Bioengineering and Biotechnology</em> 11, 1138596 (2023).</li>
+        <li id="ref-17">Everette, K. A. et al. Ex vivo prime editing of patient haematopoietic stem cells rescues sickle-cell disease phenotypes after engraftment in mice. <em>Nature Biomedical Engineering</em> 7, 616–628 (2023).</li>
+        <li id="ref-18">Lee, H., Rho, W.-Y., Kim, Y.-H., Chang, H. &amp; Jun, B.-H. CRISPR-Cas9 Gene Therapy: Non-Viral Delivery and Stimuli-Responsive Nanoformulations. <em>Molecules</em> 30, 542 (2025).</li>
+        <li id="ref-19">Taghdiri, M. &amp; Mussolino, C. Viral and Non-Viral Systems to Deliver Gene Therapeutics to Clinical Targets. <em>International Journal of Molecular Sciences</em> 25, 7333 (2024).</li>
+        <li id="ref-20">Hunt, J. M. T., Samson, C. A., du Rand, A. &amp; Sheppard, H. M. Unintended CRISPR-Cas9 editing outcomes: a review of the detection and prevalence of structural variants generated by gene-editing in human cells. <em>Human Genetics</em> 142, 705 (2023).</li>
+        <li id="ref-21">Coelho, M. A. et al. CRISPR GUARD protects off-target sites from Cas9 nuclease activity using short guide RNAs. <em>Nature Communications</em> 11, 1–12 (2020).</li>
+        <li id="ref-22">Almeida, M. &amp; Ranisch, R. Beyond safety: mapping the ethical debate on heritable genome editing interventions. <em>Humanities and Social Sciences Communications</em> 9, 1–14 (2022).</li>
+        <li id="ref-23">Gostimskaya, I. CRISPR–Cas9: A History of Its Discovery and Ethical Considerations of Its Use in Genome Editing. <em>Biochemistry. Biokhimiia</em> 87, 777 (2022).</li>
+      </ol>
+    </div>
+
+    <!-- Figures -->
+    <div class="figures-section" id="figures">
+      <div class="section-heading" style="margin-top:0;">Figure Captions</div>
+      <div class="figure-caption">
+        <strong>Figure 1 — The Structure of DNA</strong>
+        The figure shows how in the basic structure of DNA, each phosphate group (blue circle) is attached to the 5-carbon sugar deoxyribose (orange pentagon) which in turn is attached to a nitrogenous base. These 3 components make up a nucleotide. Nitrogenous bases connect to their corresponding nitrogenous base by hydrogen bonds (represented as dotted lines), connecting several nucleotides in the double helix shape of DNA.
+      </div>
+      <div class="figure-caption">
+        <strong>Figure 2 — DNA Mutations Change mRNA Which Can Change Proteins</strong>
+        (a) Normal: A sequence of DNA that shows the corresponding mRNA (in red) and the specific amino acid the codon calls for. (b) Substitution Mutation: A Cytosine nucleotide instead of Guanine makes the codon call for a stop, ending the protein early. (c) Silent Substitution Mutation: Adenine instead of Guanine, but since both codons call for Tyrosine, the mutation is silent. (d) Insertion Mutation: An extra Adenine nucleotide inserted between two Guanines leads to a Serine instead of Arginine, shifting all subsequent codons. (e) Inversion Mutation: The ATG sequence is inverted to GTA, coding for Leucine instead of Tyrosine. (f) Deletion Mutation: A Guanine nucleotide is removed, leaving leftover nucleotides that shift all subsequent codons.
+      </div>
+      <div class="figure-caption">
+        <strong>Figure 3 — SgRNA + Cas9 Form a Complex for DNA Editing</strong>
+        The figure shows a single guide RNA (sgRNA) composed of a crRNA (CRISPR RNA), which binds the targeted DNA sequence, and a tracrRNA (trans-activating CRISPR RNA), which binds and activates the Cas9 protein. The sgRNA guides a bound Cas9 protein to a complementary sequence of DNA which must have a PAM (Protospacer Adjacent Motif) site a few basepairs downstream for effective binding. Once bound, the Cas9 protein initiates double-stranded DNA cleavage.
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <p>Curieux Academic Journal &nbsp;·&nbsp; <em>The Future of Human Gene Editing Through CRISPR/Cas9</em> &nbsp;·&nbsp; Samita Golla</p>
+  <p style="margin-top:8px; font-size:11px; color:#666688;">Pages 307–319 &nbsp;·&nbsp; Published in Curieux Academic Journal</p>
+</footer>
+
+</body>
+</html>
