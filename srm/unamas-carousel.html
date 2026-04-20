@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una Mas Mexican Grill · HostBuddy Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oak: #14100A;
+    --rye: #C84B1A;
+    --rye-light: #E86B2A;
+    --cream: #FDF6EE;
+    --smoke: #2A1C10;
+    --muted: #8A7060;
+    --card-bg: #1E1208;
+    --border: rgba(200,75,26,0.22);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    background: var(--oak);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  .slides-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 32px 28px;
+    opacity: 0; transform: translateX(60px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; overflow-y: auto; scrollbar-width: none;
+  }
+  .slide::-webkit-scrollbar { display: none; }
+  .slide.active  { opacity: 1; transform: translateX(0); pointer-events: all; }
+  .slide.exit    { opacity: 0; transform: translateX(-60px); pointer-events: none; }
+
+  /* ── TITLE SLIDE ── */
+  .slide-title { text-align: center; }
+  .title-logo {
+    width: 68px; height: 68px;
+    background: linear-gradient(135deg, var(--rye), var(--rye-light));
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; margin: 0 auto 24px;
+    box-shadow: 0 10px 36px rgba(200,75,26,0.32);
+  }
+  .eyebrow {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 3px;
+    color: var(--rye); font-weight: 500; margin-bottom: 12px;
+  }
+  .title-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; line-height: 1.2;
+    color: var(--cream); margin-bottom: 16px;
+  }
+  .title-h1 em { font-style: italic; color: var(--rye-light); }
+  .title-sub {
+    font-size: 13.5px; line-height: 1.7; color: var(--muted);
+    max-width: 290px; margin: 0 auto 28px;
+  }
+  .title-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-bottom: 24px; }
+  .title-tag {
+    font-size: 11px; padding: 5px 11px;
+    background: rgba(200,75,26,0.1); border: 1px solid var(--border);
+    border-radius: 20px; color: var(--rye-light);
+  }
+  .cadence-box {
+    padding: 15px 18px;
+    background: linear-gradient(145deg, rgba(232,107,42,0.22), rgba(200,75,26,0.08));
+    border: 1px solid rgba(232,107,42,0.52); border-left: 4px solid var(--rye-light);
+    border-radius: 12px; font-size: 12.5px; color: #F3E0D0; line-height: 1.65;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.32);
+  }
+  .cadence-box strong { color: #FFD0A0; font-weight: 700; }
+
+  /* ── CAMPAIGN SLIDES ── */
+  .slide-num { font-size: 10px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); font-weight: 500; margin-bottom: 16px; }
+  .camp-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .camp-emoji { font-size: 34px; line-height: 1; flex-shrink: 0; margin-top: 3px; }
+  .camp-title { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; line-height: 1.25; color: var(--cream); }
+  .camp-timing {
+    display: inline-flex; align-items: center; gap: 5px; margin-top: 6px;
+    font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px;
+  }
+  .bubble {
+    background: linear-gradient(160deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03) 55%, rgba(0,0,0,0.22));
+    border: 1px solid rgba(232,107,42,0.45); border-radius: 16px 16px 16px 4px;
+    padding: 17px 19px; margin-bottom: 18px; position: relative;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(232,107,42,0.14) inset;
+  }
+  .bubble::after {
+    content: ''; position: absolute; left: 12px; right: 12px; bottom: 8px;
+    height: 2px; border-radius: 999px;
+    background: linear-gradient(90deg, rgba(232,107,42,0), rgba(232,107,42,0.75), rgba(232,107,42,0));
+    pointer-events: none;
+  }
+  .bubble::before {
+    content: 'HostBuddy'; position: absolute; top: -9px; left: 14px;
+    font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--rye); background: var(--oak); padding: 0 6px;
+  }
+  .bubble-text { font-size: 13.5px; line-height: 1.7; color: #FFF8EE; font-weight: 400; }
+  .bubble-text strong { color: #FFD0A0; font-weight: 700; }
+  .vip-line {
+    margin-top: 11px; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 500; padding: 4px 11px; border-radius: 20px;
+  }
+  .menu-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 500; margin-bottom: 7px; }
+  .hooks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .hook { font-size: 11px; padding: 4px 10px; background: rgba(200,75,26,0.09); border: 1px solid var(--border); border-radius: 20px; color: var(--rye-light); }
+  .impact { display: flex; align-items: flex-start; gap: 8px; padding: 11px 14px; background: rgba(255,255,255,0.03); border-radius: 10px; border-left: 2px solid var(--rye); }
+  .impact-text { font-size: 12px; color: var(--muted); line-height: 1.5; font-style: italic; }
+
+  /* per-slide color accents */
+  .c1 .bubble { border-color: rgba(232,80,80,0.56); box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(160,30,30,0.42) inset; }
+  .c2 .bubble { border-color: rgba(232,107,42,0.60); }
+  .c3 .bubble { border-color: rgba(255,185,50,0.60); box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(180,130,0,0.40) inset; }
+  .c4 .bubble { border-color: rgba(72,184,156,0.62); box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(26,107,90,0.42) inset; }
+  .c5 .bubble { border-color: rgba(157,143,255,0.62); box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(74,61,143,0.44) inset; }
+  .c6 .bubble { border-color: rgba(255,213,128,0.65); box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 0 1px rgba(200,160,50,0.44) inset; }
+
+  .c1 .camp-timing { background: rgba(160,30,30,0.15); color: #E85050; border: 1px solid rgba(160,30,30,0.3); }
+  .c1 .vip-line    { background: rgba(160,30,30,0.12); color: #E85050; border: 1px solid rgba(160,30,30,0.3); }
+  .c1 .impact      { border-left-color: #A01E1E; }
+  .c2 .camp-timing { background: rgba(200,75,26,0.15); color: var(--rye-light); border: 1px solid var(--border); }
+  .c2 .vip-line    { background: rgba(200,75,26,0.12); color: var(--rye-light); border: 1px solid var(--border); }
+  .c3 .camp-timing { background: rgba(180,130,0,0.15); color: #FFB932; border: 1px solid rgba(180,130,0,0.3); }
+  .c3 .vip-line    { background: rgba(180,130,0,0.12); color: #FFB932; border: 1px solid rgba(180,130,0,0.3); }
+  .c3 .impact      { border-left-color: #B48200; }
+  .c4 .camp-timing { background: rgba(26,107,90,0.15); color: #48B89C; border: 1px solid rgba(26,107,90,0.3); }
+  .c4 .vip-line    { background: rgba(26,107,90,0.12); color: #48B89C; border: 1px solid rgba(26,107,90,0.3); }
+  .c4 .impact      { border-left-color: #1A6B5A; }
+  .c5 .camp-timing { background: rgba(74,61,143,0.15); color: #9D8FFF; border: 1px solid rgba(74,61,143,0.3); }
+  .c5 .vip-line    { background: rgba(74,61,143,0.12); color: #9D8FFF; border: 1px solid rgba(74,61,143,0.3); }
+  .c5 .impact      { border-left-color: #4A3D8F; }
+  .c6 .camp-timing { background: rgba(255,213,128,0.1); color: #FFD580; border: 1px solid rgba(255,213,128,0.2); }
+  .c6 .vip-line    { background: rgba(255,213,128,0.08); color: #FFD580; border: 1px solid rgba(255,213,128,0.2); }
+  .c6 .impact      { border-left-color: #C8A032; }
+
+  /* ── NAV ── */
+  .nav {
+    z-index: 10; padding: 14px 28px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: var(--oak); flex-shrink: 0;
+  }
+  .dots { display: flex; gap: 6px; align-items: center; }
+  .dot-el {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--smoke); border: 1px solid var(--border);
+    transition: all 0.3s ease; cursor: pointer;
+  }
+  .dot-el.active { width: 20px; border-radius: 3px; background: var(--rye); border-color: var(--rye); }
+  .nav-btn {
+    display: flex; align-items: center; gap: 7px; padding: 11px 22px;
+    border-radius: 30px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .btn-next { background: linear-gradient(135deg, var(--rye), var(--rye-light)); color: #fff; }
+  .btn-next:active { transform: scale(0.95); }
+  .btn-prev { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-prev.hidden { visibility: hidden; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div class="slides-wrap">
+
+  <!-- SLIDE 0: Title -->
+  <div class="slide slide-title active" data-index="0">
+    <div class="title-logo">🌮</div>
+    <div class="eyebrow">HostBuddy AI · Una Mas Mexican Grill</div>
+    <h1 class="title-h1">Autonomous<br>Engagement<br><em>Playbook</em></h1>
+    <p class="title-sub">6 campaign drops built around your menu, identity, and guest journey — running on autopilot.</p>
+    <div class="title-tags">
+      <span class="title-tag">🥑 Free Guac Drop</span>
+      <span class="title-tag">🌮 Taco Tuesday</span>
+      <span class="title-tag">🌯 Burrito Spotlight</span>
+      <span class="title-tag">🥤 Agua Fresca Friday</span>
+      <span class="title-tag">🍟 Carne Asada Fries</span>
+      <span class="title-tag">🥣 Brunch Burrito Sunday</span>
+    </div>
+    <div class="cadence-box">
+      <strong>📅 One push per week, max.</strong> Guests feel like insiders, not spammed. Each campaign rotates on a weekly cadence so engagement stays high and unsubscribes stay near zero.
+    </div>
+  </div>
+
+  <!-- SLIDE 1: Free Guac Drop -->
+  <div class="slide c1" data-index="1">
+    <div class="slide-num">Campaign 01 of 06 · Tuesday Push</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🥑</span>
+      <div>
+        <div class="camp-title">Free Guac Drop</div>
+        <span class="camp-timing">📅 Every Tuesday</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        VIP perk dropping NOW 🥑<br><br>
+        Add a free <strong>Side of Guacamole</strong> to any burrito or taco order today — on the house.<br><br>
+        Pair it with the <strong>5 Layer Dip</strong> for the full experience. VIPs only, show this message at the counter 🔑
+      </p>
+      <div class="vip-line">⭐ VIP Perk — Free Guac (3oz)</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Side of Guacamole</span>
+      <span class="hook">5 Layer Dip</span>
+      <span class="hook">Chips & Guacamole</span>
+      <span class="hook">Mas Nachos</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">Turns a low-cost add-on into a perceived high-value reward — drives Tuesday foot traffic with zero margin hit</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Taco Tuesday -->
+  <div class="slide c2" data-index="2">
+    <div class="slide-num">Campaign 02 of 06 · Tuesday Evening</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🌮</span>
+      <div>
+        <div class="camp-title">Taco Tuesday Ritual</div>
+        <span class="camp-timing">📅 Every Tuesday 4 PM+</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        Taco Tuesday is real here 🌮<br><br>
+        This week's pick: <strong>Taqueria Tacos</strong> — two tacos, your choice of chicken or steak, cilantro, onion, hot salsa. The real deal.<br><br>
+        Or go seafood: <strong>San Lucas Fish Taco</strong> + <strong>San Lucas Shrimp Taco</strong>. VIPs get $2 off any taco combo 🔥
+      </p>
+      <div class="vip-line">🔥 VIP Perk — $2 off any taco combo</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Taqueria Tacos (2)</span>
+      <span class="hook">San Lucas Fish Taco</span>
+      <span class="hook">San Lucas Shrimp Taco</span>
+      <span class="hook">Seasoned Carnitas Taco</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">Establishes a predictable Tuesday ritual — guests plan their week around it and bring friends</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Burrito Spotlight -->
+  <div class="slide c3" data-index="3">
+    <div class="slide-num">Campaign 03 of 06 · Sunday / Monday</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🌯</span>
+      <div>
+        <div class="camp-title">Burrito of the Week</div>
+        <span class="camp-timing">📅 Sunday or Monday</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        🌯 This week's spotlight:<br>
+        <strong>Pineapple Thai Burrito</strong> — pineapple salsa, rice, cilantro, sweet chili sauce in a warm tomato tortilla. Zero apologies.<br><br>
+        Or go bold with the <strong>Foghead Burrito</strong> — homemade BBQ sauce, guac, corn salsa. VIPs get it $3 off 🤙
+      </p>
+      <div class="vip-line">🏆 VIP Perk — $3 off featured burrito</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Pineapple Thai Burrito</span>
+      <span class="hook">Foghead Burrito</span>
+      <span class="hook">Mucha Carne Burrito</span>
+      <span class="hook">Grilled Fajita Burrito</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">Rotates spotlight across high-margin specialty burritos — moves guests off the default bean & cheese order</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Agua Fresca Friday -->
+  <div class="slide c4" data-index="4">
+    <div class="slide-num">Campaign 04 of 06 · Friday Push</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🥤</span>
+      <div>
+        <div class="camp-title">Agua Fresca Friday</div>
+        <span class="camp-timing">📅 Friday 12–7 PM</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        Start the weekend right 🌞<br><br>
+        <strong>Agua Fresca</strong> + any burrito or fajita plate — the combo that hits different on a Friday.<br><br>
+        Pair with the <strong>Fajita Plate</strong> for the full Una Mas experience. VIPs get a free large Agua Fresca upgrade 🥤
+      </p>
+      <div class="vip-line">🔑 VIP — Free Large Agua Fresca</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Agua Fresca</span>
+      <span class="hook">Fajita Plate</span>
+      <span class="hook">Grilled Fajita Burrito</span>
+      <span class="hook">Enchilada Plate</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">Activates Friday lunch/dinner with a high-perceived-value drink upgrade that costs very little to deliver</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Carne Asada Fries Upsell -->
+  <div class="slide c5" data-index="5">
+    <div class="slide-num">Campaign 05 of 06 · Always-On AI Trigger</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🍟</span>
+      <div>
+        <div class="camp-title">Add-On Upsell — Carne Asada Fries</div>
+        <span class="camp-timing">⚡ AI Triggered at Order</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        Want to level up your order? 🍟<br><br>
+        Add <strong>Carne Asada Fries</strong> — french fries, melted cheddar, cilantro, and onion. Most guests who try it never go back to plain chips.<br><br>
+        Or share the <strong>Mas Nachos</strong> — loaded with cheese, sour cream, guac, beans, and salsa fresca 🧀
+      </p>
+      <div class="vip-line">📈 AOV Boost · Zero Staff Effort</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Carne Asada Fries</span>
+      <span class="hook">Mas Nachos</span>
+      <span class="hook">5 Layer Dip</span>
+      <span class="hook">Chips & Guacamole</span>
+      <span class="hook">Chicken Taquitos</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">Direct AOV lift — HostBuddy triggers contextually when a guest places a taco or burrito order, no manual sends needed</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Brunch Burrito Sunday -->
+  <div class="slide c6" data-index="6">
+    <div class="slide-num">Campaign 06 of 06 · Weekend VIP</div>
+    <div class="camp-header">
+      <span class="camp-emoji">🥣</span>
+      <div>
+        <div class="camp-title">Brunch Burrito — Weekend VIP</div>
+        <span class="camp-timing">📅 Saturday / Sunday Morning</span>
+      </div>
+    </div>
+    <div class="bubble">
+      <p class="bubble-text">
+        Weekend brunch, Una Mas style 🌅<br><br>
+        <strong>Huevos con Chorizo Burrito</strong> — seasoned chorizo, potatoes, eggs, Una Mas signature sauce. The one that gets people out of bed.<br><br>
+        VIP members: your <strong>free Chips & Salsa</strong> is waiting with every breakfast burrito. Show this to your crew 🌮
+      </p>
+      <div class="vip-line">🌟 VIP — Free Chips & Salsa with Brunch</div>
+    </div>
+    <div class="menu-label">Menu Hooks</div>
+    <div class="hooks">
+      <span class="hook">Huevos con Chorizo Burrito</span>
+      <span class="hook">Veggie Breakfast Burrito</span>
+      <span class="hook">Chips & Salsa Fresca</span>
+      <span class="hook">Tortilla Soup</span>
+    </div>
+    <div class="impact">
+      <span>👉</span>
+      <span class="impact-text">VIP perk builds the weekend morning loyalty loop — converts one-time visitors into Saturday regulars</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV BAR -->
+<div class="nav">
+  <button class="nav-btn btn-prev hidden" id="btnPrev">← Back</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn btn-next" id="btnNext">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const btnNext = document.getElementById('btnNext');
+  const btnPrev = document.getElementById('btnPrev');
+  const dotsEl  = document.getElementById('dots');
+  const total   = slides.length;
+  let current   = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot-el' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(next) {
+    if (next < 0 || next >= total) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current].classList.remove('exit'), 420);
+    current = next;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot-el').forEach((d, i) => d.classList.toggle('active', i === current));
+    btnPrev.classList.toggle('hidden', current === 0);
+    btnNext.textContent = current === total - 1 ? '✓ Done' : 'Next →';
+  }
+
+  btnNext.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+
+  let sx = 0;
+  const wrap = document.querySelector('.slides-wrap');
+  wrap.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 45) dx < 0 ? goTo(current + 1) : goTo(current - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>
